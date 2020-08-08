@@ -8,18 +8,28 @@
                 <div class="card-header">{{ $thread->title }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     <p>
                         {{ $thread->body }}
                     </p>
-                    
                 </div>
             </div>
+
+            @foreach ($thread->replies as $reply)
+            <div class="card mt-3">
+                <div class="card-header">
+                    <a href="#">
+                        {{ $reply->owner->name }} 
+                    </a>
+                    said... {{ $reply->created_at->diffForHumans() }}
+                </div>
+                <div class="card-body">
+                    <article>
+                        <p>{{ $reply->body }} </p>
+                    </article>
+                </div>
+            </div>
+            @endforeach
+
         </div>
     </div>
 </div>
